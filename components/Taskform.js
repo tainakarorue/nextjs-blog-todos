@@ -17,7 +17,7 @@ export default function TaskForm({ taskCreated }) {
       },
     }).then((res) => {
       if (res.status === 401) {
-        alert("JWT Token not valid");
+        alert("JWT Token not valid!");
       }
     });
     setSelectedTask({ id: 0, title: "" });
