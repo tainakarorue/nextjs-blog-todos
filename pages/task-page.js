@@ -14,18 +14,15 @@ export default function TaskPage({ staticfilterdTasks }) {
   const { data: tasks, mutate } = useSWR(apiUrl, fetcher, {
     initialData: staticfilterdTasks,
   });
-
   const filteredTasks = tasks?.sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
-
   useEffect(() => {
     mutate();
   }, []);
-
   return (
     <StateContextProvider>
-      <Layout title="Task Page">
+      <Layout title="Task page">
         <TaskForm taskCreated={mutate} />
         <ul>
           {filteredTasks &&
@@ -33,7 +30,6 @@ export default function TaskPage({ staticfilterdTasks }) {
               <Task key={task.id} task={task} taskDeleted={mutate} />
             ))}
         </ul>
-
         <Link href="/main-page">
           <div className="flex cursor-pointer mt-12">
             <svg
@@ -57,7 +53,6 @@ export default function TaskPage({ staticfilterdTasks }) {
     </StateContextProvider>
   );
 }
-
 export async function getStaticProps() {
   const staticfilterdTasks = await getAllTasksData();
 
